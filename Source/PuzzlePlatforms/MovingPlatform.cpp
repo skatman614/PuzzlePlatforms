@@ -10,7 +10,24 @@ AMovingPlatform::AMovingPlatform()
 
 	MoveSpeed = 5.0f;
 
+	RequiresActivation = false;
 	
+}
+
+void AMovingPlatform::AddActiveTrigger()
+{
+	if (RequiresActivation)
+	{
+		ActiveTriggers++;
+	}
+}
+
+void AMovingPlatform::RemoveActiveTrigger()
+{
+	if (RequiresActivation)
+	{
+		ActiveTriggers--;
+	}
 }
 
 void AMovingPlatform::BeginPlay()
@@ -32,7 +49,7 @@ void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (HasAuthority())
+	if (HasAuthority() && ((RequiresActivation && ActiveTriggers > 1) || !RequiresActivation ))
 	{
 		
 		FVector Location = GetActorLocation();

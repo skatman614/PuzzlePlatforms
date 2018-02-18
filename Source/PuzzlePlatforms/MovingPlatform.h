@@ -20,6 +20,10 @@ public:
 	UPROPERTY(EditAnywhere, Meta = (MakeEditWidget = true), Category = "Platform")
 	FVector TargetLocation;	
 
+	void AddActiveTrigger();
+
+	void RemoveActiveTrigger();
+
 protected:
 	
 	virtual void BeginPlay() override;
@@ -34,6 +38,12 @@ private:
 	FVector GlobalTargetLocation;
 
 	FVector GlobalStartLocation;
-	
-	
+
+	UPROPERTY(EditAnywhere)
+	int ActiveTriggers = 1;
+		
+	UPROPERTY(EditAnywhere)
+	bool RequiresActivation;
+
+	void MakePlatformMove(float DeltaTime);
 };
